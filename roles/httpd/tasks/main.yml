@@ -1,0 +1,11 @@
+---
+ - name: install httpd application
+   yum: name="{{ package_name }}" state=present
+ - name: copy index.html
+   copy: src=index.html dest=/var/www/html/index.html
+ - name: copying httpd.conf file
+   template:
+     src: httpd.conf.j2
+     dest: /etc/httpd/conf/httpd.conf
+ - name: strting httpd
+   service: name="{{ package_name }}" state=restarted
